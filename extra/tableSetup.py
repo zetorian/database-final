@@ -104,3 +104,9 @@ for i in range(12):
 #        print('DEBUGQUERY: ' + query)
     
         cursor.execute(query)
+
+
+#
+#  here we will add in name list for ranom data gen
+#  use an auto increment for the SSNs? as they must all be unique
+#
