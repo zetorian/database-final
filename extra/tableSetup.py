@@ -14,6 +14,7 @@
 
 import mysql.connector
 import sys
+import random
 
 #connect to mysql running on local hust with a given user
 
@@ -22,10 +23,12 @@ cursor = cnx.cursor(buffered=True)
 
 #this purges the old one so we can test new build
 # do this if you need to run multiple times
+#comment this out if this is the first time run
 
-#print ('drop database "EMR"')
-#query="drop database EMR"
-#cursor.execute(query)
+
+print ('drop database "EMR"')
+query="drop database EMR"
+cursor.execute(query)
 
 
 # this creates the database
@@ -110,3 +113,46 @@ for i in range(12):
 #  here we will add in name list for ranom data gen
 #  use an auto increment for the SSNs? as they must all be unique
 #
+
+listFN=open("first-names.txt","r")
+
+fnames=[]
+
+#fill the list with all the names
+
+
+fnames=listFN.read().splitlines()
+
+lnames=[]
+
+listLN=open("first-names.txt","r")
+
+lnames=listLN.read().splitlines()
+
+#
+#here we will create some doctors
+#will create 30 for now/only three columns -TODO-  add in lists for the other columns 
+#
+
+for i in range(100000000,100000030):
+    print "adding doctor#: " + str(i-100000000)
+    query = "INSERT INTO doctor (ssn, fname, lname) VALUES (%s,%s,%s);"
+    args = (str(i),fnames[random.randint(0,4944)],lnames[random.randint(0,663)])
+    print "DEBUGQUERY: " + query
+    cursor.execute(query,args)
+
+#
+# here is the same for patients
+# creating 50 for now same columns as doctors -TODO- create list for remaining columns
+#
+
+for i in range(100000030,100000080):
+    print "adding patient#: " + str(i-100000030)
+    query = "INSERT INTO patient (ssn, fname, lname) VALUES (%s,%s,%s);"
+    args = (str(i),fnames[random.randint(0,4944)],lnames[random.randint(0,663)])
+    print "DEBUGQUERY: " + query
+    cursor.execute(query,args)
+
+cnx.commit()
+cursor.close()
+cnx.close()
