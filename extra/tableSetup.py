@@ -110,28 +110,44 @@ for i in range(12):
 
 
 #
-#  here we will add in name list for ranom data gen
-#  use an auto increment for the SSNs? as they must all be unique
+# Here we open all the list files for data generation
+#
 #
 
+hospitalFN=open("hospital.txr","r")
+pharmacyFN=open("pharmacy.txr","r")
 listFN=open("first-names.txt","r")
+listLN=open("last-names.txt","r")
+
+# Create all the lists and fill with the data from the files
 
 fnames=[]
-
-#fill the list with all the names
-
-
 fnames=listFN.read().splitlines()
 
 lnames=[]
-
-listLN=open("last-names.txt","r")
-
 lnames=listLN.read().splitlines()
 
+hospitals=[]
+hospitals=hospitalFN.read().splitlines()
+
+pharmacies=[]
+pharmacies=pharmacyFN.read().splitlines()
+
 #
-#here we will create some doctors
-#will create 30 for now/only three columns -TODO-  add in lists for the other columns 
+# creating the hospitals, pharmacies and insurance companies
+# first since they do not have any foreign keys
+#
+
+for i in range(3):
+
+
+for i in range(3):
+
+
+for i in range(3);
+#
+# here we will create some doctors
+# will create 30 for now/only three columns -TODO-  add in lists for the other columns 
 #
 
 for i in range(100000000,100000030):
