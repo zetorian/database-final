@@ -125,7 +125,7 @@ fnames=listFN.read().splitlines()
 
 lnames=[]
 
-listLN=open("first-names.txt","r")
+listLN=open("last-names.txt","r")
 
 lnames=listLN.read().splitlines()
 
