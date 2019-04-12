@@ -114,8 +114,8 @@ for i in range(12):
 #
 #
 
-hospitalFN=open("hospital.txr","r")
-pharmacyFN=open("pharmacy.txr","r")
+hospitalFN=open("hospital.txt","r")
+pharmacyFN=open("pharmacy.txt","r")
 listFN=open("first-names.txt","r")
 listLN=open("last-names.txt","r")
 
@@ -133,6 +133,12 @@ hospitals=hospitalFN.read().splitlines()
 pharmacies=[]
 pharmacies=pharmacyFN.read().splitlines()
 
+insuranceCo=[]
+
+# just using an increment to imitate phone numbers and ensure they are distinct
+
+nextPhone=5551111111
+
 #
 # creating the hospitals, pharmacies and insurance companies
 # first since they do not have any foreign keys
@@ -148,6 +154,7 @@ for i in range(3);
 #
 # here we will create some doctors
 # will create 30 for now/only three columns -TODO-  add in lists for the other columns 
+# SSNs will be consecutive and names randomized from the two word lists
 #
 
 for i in range(100000000,100000030):
