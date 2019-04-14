@@ -44,7 +44,7 @@ cursor.execute(query)
 table = ['doctor','patient','nurse','login','insuranceCo','Appointment','hospital','procedures','consent','presciption','pharmacy','bill' ]
 cols = ["ssn VARCHAR(9), lname VARCHAR(255), fname VARCHAR(255), phone VARCHAR(11), speciality VARCHAR(255), hospital VARCHAR(150), address VARCHAR(255)",
         "ssn VARCHAR(9), lname VARCHAR(255), fname VARCHAR(255), phone VARCHAR(11), address VARCHAR(255), primaryDoctor VARCHAR(9), insuranceCo VARCHAR(150)",
-        "ssn VARCHAR(9), lname VARCHAR(255), fname VARCHAR(255), phone VARCHAR(11), address VARCHAR(255), hospital int",
+        "ssn VARCHAR(9), lname VARCHAR(255), fname VARCHAR(255), phone VARCHAR(11), address VARCHAR(255), hospital INT",
         "login VARCHAR(150), passwordHash VARCHAR(255), ssn VARCHAR(9), level INT",
         "name VARCHAR(150), phone VARCHAR(11), address VARCHAR(255)",
         "dateTime DATETIME, location VARCHAR(255), doctor VARCHAR(9), patient VARCHAR(9), paid DECIMAL(7,2), ammountBilled DECIMAL(7,2)",
@@ -118,6 +118,9 @@ hospitalFN=open("hospital.txt","r")
 pharmacyFN=open("pharmacy.txt","r")
 listFN=open("first-names.txt","r")
 listLN=open("last-names.txt","r")
+listAddr=open("addresses.txt","r")
+listIns=open("insuranceCos.txt","r")
+
 
 # Create all the lists and fill with the data from the files
 
@@ -134,6 +137,12 @@ pharmacies=[]
 pharmacies=pharmacyFN.read().splitlines()
 
 insuranceCo=[]
+insuranceCo=listIns.read().splitlines()
+
+address=[]
+address=listAddr.read().splitlines()
+nextAddr=0
+
 
 # just using an increment to imitate phone numbers and ensure they are distinct
 
@@ -145,37 +154,78 @@ nextPhone=5551111111
 #
 
 for i in range(3):
-
+    print "adding in the three test hospitals"
+    query= "INSERT INTO hospital (name, phone, address) VALUES (%s,%s,%s);"
+    args=(hospitals[i],str(nextPhone),address[nextAddr])
+    nextPhone+=1
+    nextAddr+=1
+    print "DEBUGQUERY: " + query
+    cursor.execute(query,args)
+    
+for i in range(3):
+    print "adding in the three test pharmacies"
+    query= "INSERT INTO pharmacy (name, phone, address) VALUES (%s,%s,%s);"
+    args=(pharmacies[i],str(nextPhone),address[nextAddr])
+    nextPhone+=1
+    nextAddr+=1
+    print "DEBUGQUERY: " + query
+    cursor.execute(query,args)
 
 for i in range(3):
+    print "adding in the three test insurance"
+    query= "INSERT INTO insuranceCo (name, phone, address) VALUES (%s,%s,%s);"
+    args=(insuranceCo[i],str(nextPhone),address[nextAddr])
+    nextPhone+=1
+    nextAddr+=1
+    print "DEBUGQUERY: " + query
+    cursor.execute(query,args)
 
-
-for i in range(3);
 #
 # here we will create some doctors
-# will create 30 for now/only three columns -TODO-  add in lists for the other columns 
+# will create -TODO-  add specialty 
 # SSNs will be consecutive and names randomized from the two word lists
 #
 
 for i in range(100000000,100000030):
     print "adding doctor#: " + str(i-100000000)
-    query = "INSERT INTO doctor (ssn, fname, lname) VALUES (%s,%s,%s);"
-    args = (str(i),fnames[random.randint(0,4944)],lnames[random.randint(0,663)])
+    query = "INSERT INTO doctor (ssn, fname, lname, phone, address,hospital) VALUES (%s,%s,%s,%s,%s,%s);"
+    args = (str(i),fnames[random.randint(0,4944)],lnames[random.randint(0,663)],str(nextPhone),address[nextAddr],hospitals[random.randint(0,2)])
     print "DEBUGQUERY: " + query
+    nextPhone+=1
+    nextAddr+=1
     cursor.execute(query,args)
 
 #
 # here is the same for patients
-# creating 50 for now same columns as doctors -TODO- create list for remaining columns
+# creating 150 -TODO- set a primary doctor
 #
 
-for i in range(100000030,100000080):
+for i in range(100000030,100000180):
     print "adding patient#: " + str(i-100000030)
-    query = "INSERT INTO patient (ssn, fname, lname) VALUES (%s,%s,%s);"
-    args = (str(i),fnames[random.randint(0,4944)],lnames[random.randint(0,663)])
+    query = "INSERT INTO patient (ssn, fname, lname, phone, address, insuranceCo) VALUES (%s,%s,%s,%s,%s,%s);"
+    args = (str(i),fnames[random.randint(0,4944)],lnames[random.randint(0,663)],str(nextPhone),address[nextAddr],insuranceCo[random.randint(0,2)])
     print "DEBUGQUERY: " + query
+    nextPhone+=1
+    nextAddr+=1
     cursor.execute(query,args)
 
+#
+# here is for nurses
+# create 30 
+#
+
+for i in range(100000180,100000210):
+    print "adding nurse#: " + str(i-100000000)
+    query = "INSERT INTO nurse (ssn, fname, lname, phone, address,hospital) VALUES (%s,%s,%s,%s,%s,%s);"
+    args = (str(i),fnames[random.randint(0,4944)],lnames[random.randint(0,663)],str(nextPhone),address[nextAddr],str(random.randint(1,3)))
+    print "DEBUGQUERY: " + query
+    nextPhone+=1
+    nextAddr+=1
+    cursor.execute(query,args)
+
+#
+# commit and close
+#
 cnx.commit()
 cursor.close()
 cnx.close()
