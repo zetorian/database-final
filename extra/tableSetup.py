@@ -129,6 +129,10 @@ fnames=listFN.read().splitlines()
 
 lnames=[]
 lnames=listLN.read().splitlines()
+i=0
+for name in lnames:
+    lnames[i]=lnames[i].capitalize()
+    i+=1
 
 hospitals=[]
 hospitals=hospitalFN.read().splitlines()
