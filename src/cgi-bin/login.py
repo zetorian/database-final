@@ -15,6 +15,15 @@ cgitb.enable() #enable error logging in browser, we probably want this on for a 
 # cgitb.enable(display=0, logdir="/path/to/logdir") # if you prefer log files
 
 print("Content-Type: text/html\n\n") #required header line
-print("working!")
 
+form = cgi.FieldStorage()
+if "uname" not in form or "pass" not in form:
+    print("<H1>Error</H2>\n" +
+        "could not log in\n" +
+        "<a href=/login.html>return to login page</a>")
 
+result = _check_pass()
+
+def _check_pass(p)
+    
+    

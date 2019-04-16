@@ -4,7 +4,7 @@
 </head>
 <body>
 	<h2>Login:</h2>
-	<form>
+	<form action="/cgi-bin/login.py" method="post">
 	<table>
 		<tr>
 			<td>Username: <input type="text" name="uname"></td>
@@ -13,7 +13,7 @@
 			<td>Password: <input type="password" name="pass"></td>
 		</tr>
 	</table>
-	<input type="submit" value="Login" action="http://127.0.0.1/cgi-bin/login.py">
+	<input type="submit" value="Login">
 	</form>
 </body>
 </html>
