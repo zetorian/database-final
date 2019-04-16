@@ -8,8 +8,9 @@
 # documentation:
 # https://docs.python.org/3/library/cgi.html
 
-import cgi
+import msql.connector
 
+import cgi
 import cgitb
 cgitb.enable() #enable error logging in browser, we probably want this on for a while
 # cgitb.enable(display=0, logdir="/path/to/logdir") # if you prefer log files
