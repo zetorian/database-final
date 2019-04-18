@@ -15,6 +15,7 @@
 import mysql.connector
 import sys
 import random
+import hashlib
 
 #connect to mysql running on local hust with a given user
 
@@ -226,6 +227,29 @@ for i in range(100000180,100000210):
     nextPhone+=1
     nextAddr+=1
     cursor.execute(query,args)
+
+#
+# import password lists - users will be generated from the doctor/patient/nurse tables first.last names
+# generate the password hashes and insert into the login table
+#
+passwords=[]
+userNames=[]
+passwdFN=open("darkweb2017-top1000.txt","r")
+passwords=passwdFN.read().splitlines()
+hashes=[]
+for passwd in passwords:
+    hash = hashlib.sha1(passwd)
+    hashes.append(hash.hexdigest())
+    print(passwd + ":" + hash.hexdigest())
+    
+query = "SELECT fname,lname FROM doctor;"
+cursor.execute(query)
+users=[]
+for fname,lname in cursor:
+    users.append(fname + "." + lname)
+
+for user in users:
+    print(user)
 
 #
 # commit and close

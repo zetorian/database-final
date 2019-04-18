@@ -44,7 +44,6 @@ qwerty123
 zxcvbnm
 555555
 112233
-fuckyou
 asdfghjkl
 12345a
 123123123
@@ -54,8 +53,6 @@ computer
 aaaaaa
 159753
 iloveyou1
-fuckyou1
-
 princess
 789456123
 11111111
@@ -117,7 +114,6 @@ iloveyou2
 angel1
 jordan
 147258369
-bitch1
 michelle
 q1w2e3r4
 jessica1
@@ -129,7 +125,6 @@ liverpool
 zxcvbn
 thomas
 asdasd
-fuckyou2
 justin
 nicole
 1111111111
@@ -164,7 +159,6 @@ basketball
 qwerty12
 charlie1
 passw0rd
-asshole1
 hunter
 marina
 welcome
@@ -301,7 +295,6 @@ patrick
 diamond
 456789
 victoria
-asshole
 taylor
 qwertyu
 andrew1
@@ -382,7 +375,6 @@ jennifer1
 !~!1
 bubbles
 samuel
-fuckoff
 lovers
 cheese1
 0123456
@@ -467,17 +459,14 @@ jesus
 123hfjdk147
 nicolas
 batman1
-weed420
 password123
 loser1
 123456j
 iloveyou!
 pepper1
-fuckoff1
 555666
 iloveu2
 sabrina
-pussy1
 bubbles1
 098765
 master1
@@ -501,7 +490,6 @@ canada
 Exigent
 destiny
 success
-nigger1
 135790
 asdfghjkl1
 124578
@@ -549,7 +537,6 @@ alexandra
 159951
 iloveu1
 veronica
-fuckme1
 baby123
 yankees
 stupid1
@@ -597,7 +584,6 @@ asdf123
 963852741
 zk.:
 guitar
-fucker1
 destiny1
 hotmail
 johnny
@@ -605,7 +591,6 @@ doudou
 q123456
 bailey1
 asdfgh1
-fucker
 louise
 sparky
 sweety
@@ -639,7 +624,6 @@ jackie
 charlotte
 scooter1
 caroline
-fuck
 merlin
 junior1
 super123
@@ -674,7 +658,6 @@ cooper
 muffin
 christian1
 love13
-fucku2
 arsenal1
 lucky7
 diablo
@@ -693,7 +676,6 @@ chivas1
 sexy
 hockey1
 1a2b3c4d
-pussy
 playboy1
 stalker
 cherry
@@ -720,7 +702,6 @@ pretty
 startfinding
 softball
 dolphin1
-fuckme
 test123
 qwerty1234
 kobe24
@@ -786,10 +767,8 @@ angelo
 nicholas1
 portugal
 precious
-jackass1
 jonathan1
 yfnfif
-bitch
 tiffany
 rabbit
 rainbow1
@@ -797,7 +776,6 @@ angel123
 popcorn
 barbara
 brandy
-fuckyou!
 starwars1
 barney
 natalia
@@ -943,7 +921,6 @@ kimberly
 carlos1
 z123456
 daisy1
-jackass
 m
 5555555
 zoosk
