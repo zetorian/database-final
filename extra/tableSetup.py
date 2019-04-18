@@ -237,10 +237,13 @@ userNames=[]
 passwdFN=open("darkweb2017-top1000.txt","r")
 passwords=passwdFN.read().splitlines()
 hashes=[]
-for passwd in passwords:
-    hash = hashlib.sha1(passwd)
-    hashes.append(hash.hexdigest())
-    print(passwd + ":" + hash.hexdigest())
+
+# This was the test for the password hashing
+
+#for passwd in passwords:
+#    hash = hashlib.sha1(passwd)
+#    hashes.append(hash.hexdigest())
+#    print(passwd + ":" + hash.hexdigest())
     
 query = "SELECT fname,lname FROM doctor;"
 cursor.execute(query)
@@ -248,8 +251,26 @@ users=[]
 for fname,lname in cursor:
     users.append(fname + "." + lname)
 
+# This was for debug of username creation    
+    
+#for user in users:
+#    print(user)
+
+# open/create the user/password file they will be in the form user:password
+userpassFN = open("user_passwd.txt","w+")
+
+#
+# this gens the users and the userpassword list -TODO- link to the SSN of the users
+#
 for user in users:
-    print(user)
+    passwd=passwords[random.randint(0,976)]
+    hash = hashlib.sha1(passwd)
+    filestr= user + ":" + passwd
+    userpassFN.write(filestr+'\n')
+    query="INSERT INTO login (login, passwordHash) VALUES ('" + user + "','" + hash.hexdigest() + "');"
+    print("DEBUGQUERY: " + query)
+    print("CREATING USER: " + user + " with hash : " + hash.hexdigest())
+    cursor.execute(query)
 
 #
 # commit and close
