@@ -250,7 +250,15 @@ cursor.execute(query)
 users=[]
 for fname,lname in cursor:
     users.append(fname + "." + lname)
-
+query = "SELECT fname,lname FROM patient;"
+cursor.execute(query)
+for fname,lname in cursor:
+    users.append(fname + "." + lname)
+query = "SELECT fname,lname FROM nurse;"
+cursor.execute(query)
+for fname,lname in cursor:
+    users.append(fname + "." + lname)
+    
 # This was for debug of username creation    
     
 #for user in users:
@@ -268,7 +276,7 @@ for user in users:
     filestr= user + ":" + passwd
     userpassFN.write(filestr+'\n')
     query="INSERT INTO login (login, passwordHash) VALUES ('" + user + "','" + hash.hexdigest() + "');"
-    print("DEBUGQUERY: " + query)
+#    print("DEBUGQUERY: " + query)
     print("CREATING USER: " + user + " with hash : " + hash.hexdigest())
     cursor.execute(query)
 
