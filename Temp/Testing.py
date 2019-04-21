@@ -18,7 +18,7 @@ cursor = cnx.cursor(buffered=True)
 cgitb.enable() #for debugging
 form = cgi.FieldStorage()
 
-isPosted = form.getvalue('isposted')
+isPosted = True#form.getvalue('isposted')
 
 fname = form.getvalue('fname')
 lname = form.getvalue('lname')
@@ -43,17 +43,18 @@ if isPosted:
     insuranceErrorMsg = ("Not a valid insurance company")
     docErrorMsg = ("Doctor not registered in this system")
 
+    
     print ("Content-type:text/html\r\n\r\n")
     print ('<html>')
     print ('<head>')
-    print ('<title>EMR System</title>')
-    print("""<style> p.error {color: red;} </style>""")
+    print ('<title>EMR System/title>')
+    #print("""<style> p.error {color: red;} </style>""")
     print ('</head>')
     print ('<body>')
     print ('<h2>Add Patient</h2>')
 
     print('<h3>')
-    print("Name of the user is: %s" % fname)
+    #print("Name of the patient is: %s" % fname)
     print('</h3>')
 
     print('<form action="./addpatient.py" method="post">')
@@ -64,7 +65,10 @@ if isPosted:
     print('Frist Name')
     print('</td>')
     print('<td>')
-    print('<input type="text" name="fname" value="%s"></input>' % fname)
+    if fname:
+        print('<input type="text" name="fname" value="%s"></input>' % fname)
+    else:
+        print('<input type="text" name="fname"></input>')
     print('</td>')
     print('<td>')
     if fname is None:
@@ -73,7 +77,6 @@ if isPosted:
         print('</p>')
     print('</td>')
     print('</tr>')
-
 
     print('<tr>')
     print('<td>')
@@ -87,6 +90,8 @@ if isPosted:
     print('<tr>')
     print('<td>')
     print('Social Security Number')
+    print('</td>')
+
     print('</td>')
     print('<td>')
     print('<input type="text" name="SSN"></input>')
@@ -139,6 +144,7 @@ if isPosted:
     print('</form>')
     print ('</body>')
     print ('</html>')
+
 
 else:
     print ("Content-type:text/html\r\n\r\n")
