@@ -1,0 +1,12 @@
+#Opening:
+
+export PATH=$PATH:/usr/local/mysql/bin
+
+mysql -u root -p 
+    newpassword
+
+use EMR
+SELECT name FROM hospital; 
+
+#Closing:
+\q

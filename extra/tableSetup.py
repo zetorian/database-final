@@ -18,7 +18,7 @@ import random
 
 #connect to mysql running on local hust with a given user
 
-cnx = mysql.connector.connect(user=sys.argv[1],password='',host='localhost')
+cnx = mysql.connector.connect(user=sys.argv[1],password='newpassword',host='localhost')
 cursor = cnx.cursor(buffered=True)
 
 #this purges the old one so we can test new build
@@ -26,7 +26,8 @@ cursor = cnx.cursor(buffered=True)
 #comment this out if this is the first time run
 
 
-print ('drop database "EMR"')
+print ('drop database [IF EXISTS] "EMR"')
+#TODO make this drop table only if exists
 query="drop database EMR"
 cursor.execute(query)
 
@@ -158,30 +159,30 @@ nextPhone=5551111111
 #
 
 for i in range(3):
-    print "adding in the three test hospitals"
+    print ("adding in the three test hospitals")
     query= "INSERT INTO hospital (name, phone, address) VALUES (%s,%s,%s);"
     args=(hospitals[i],str(nextPhone),address[nextAddr])
     nextPhone+=1
     nextAddr+=1
-    print "DEBUGQUERY: " + query
+    print ("DEBUGQUERY: " + query)
     cursor.execute(query,args)
     
 for i in range(3):
-    print "adding in the three test pharmacies"
+    print ("adding in the three test pharmacies")
     query= "INSERT INTO pharmacy (name, phone, address) VALUES (%s,%s,%s);"
     args=(pharmacies[i],str(nextPhone),address[nextAddr])
     nextPhone+=1
     nextAddr+=1
-    print "DEBUGQUERY: " + query
+    print ("DEBUGQUERY: " + query)
     cursor.execute(query,args)
 
 for i in range(3):
-    print "adding in the three test insurance"
+    print ("adding in the three test insurance")
     query= "INSERT INTO insuranceCo (name, phone, address) VALUES (%s,%s,%s);"
     args=(insuranceCo[i],str(nextPhone),address[nextAddr])
     nextPhone+=1
     nextAddr+=1
-    print "DEBUGQUERY: " + query
+    print ("DEBUGQUERY: " + query)
     cursor.execute(query,args)
 
 #
@@ -191,10 +192,10 @@ for i in range(3):
 #
 
 for i in range(100000000,100000030):
-    print "adding doctor#: " + str(i-100000000)
+    print ("adding doctor#: " + str(i-100000000))
     query = "INSERT INTO doctor (ssn, fname, lname, phone, address,hospital) VALUES (%s,%s,%s,%s,%s,%s);"
     args = (str(i),fnames[random.randint(0,4944)],lnames[random.randint(0,663)],str(nextPhone),address[nextAddr],hospitals[random.randint(0,2)])
-    print "DEBUGQUERY: " + query
+    print ("DEBUGQUERY: " + query)
     nextPhone+=1
     nextAddr+=1
     cursor.execute(query,args)
@@ -205,10 +206,10 @@ for i in range(100000000,100000030):
 #
 
 for i in range(100000030,100000180):
-    print "adding patient#: " + str(i-100000030)
+    print ("adding patient#: " + str(i-100000030))
     query = "INSERT INTO patient (ssn, fname, lname, phone, address, insuranceCo) VALUES (%s,%s,%s,%s,%s,%s);"
     args = (str(i),fnames[random.randint(0,4944)],lnames[random.randint(0,663)],str(nextPhone),address[nextAddr],insuranceCo[random.randint(0,2)])
-    print "DEBUGQUERY: " + query
+    print ("DEBUGQUERY: " + query)
     nextPhone+=1
     nextAddr+=1
     cursor.execute(query,args)
@@ -219,10 +220,10 @@ for i in range(100000030,100000180):
 #
 
 for i in range(100000180,100000210):
-    print "adding nurse#: " + str(i-100000000)
+    print ("adding nurse#: " + str(i-100000000))
     query = "INSERT INTO nurse (ssn, fname, lname, phone, address,hospital) VALUES (%s,%s,%s,%s,%s,%s);"
     args = (str(i),fnames[random.randint(0,4944)],lnames[random.randint(0,663)],str(nextPhone),address[nextAddr],str(random.randint(1,3)))
-    print "DEBUGQUERY: " + query
+    print ("DEBUGQUERY: " + query)
     nextPhone+=1
     nextAddr+=1
     cursor.execute(query,args)
