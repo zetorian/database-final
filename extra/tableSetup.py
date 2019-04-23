@@ -164,7 +164,7 @@ for i in range(3):
     args=(hospitals[i],str(nextPhone),address[nextAddr])
     nextPhone+=1
     nextAddr+=1
-    print "DEBUGQUERY: " + query
+#    print "DEBUGQUERY: " + query
     cursor.execute(query,args)
     
 for i in range(3):
@@ -173,7 +173,7 @@ for i in range(3):
     args=(pharmacies[i],str(nextPhone),address[nextAddr])
     nextPhone+=1
     nextAddr+=1
-    print "DEBUGQUERY: " + query
+#    print "DEBUGQUERY: " + query
     cursor.execute(query,args)
 
 for i in range(3):
@@ -182,7 +182,7 @@ for i in range(3):
     args=(insuranceCo[i],str(nextPhone),address[nextAddr])
     nextPhone+=1
     nextAddr+=1
-    print "DEBUGQUERY: " + query
+#    print "DEBUGQUERY: " + query
     cursor.execute(query,args)
 
 #
@@ -195,7 +195,7 @@ for i in range(100000000,100000030):
     print "adding doctor#: " + str(i-100000000)
     query = "INSERT INTO doctor (ssn, fname, lname, phone, address,hospital) VALUES (%s,%s,%s,%s,%s,%s);"
     args = (str(i),fnames[random.randint(0,4944)],lnames[random.randint(0,663)],str(nextPhone),address[nextAddr],hospitals[random.randint(0,2)])
-    print "DEBUGQUERY: " + query
+#    print "DEBUGQUERY: " + query
     nextPhone+=1
     nextAddr+=1
     cursor.execute(query,args)
@@ -209,7 +209,7 @@ for i in range(100000030,100000180):
     print "adding patient#: " + str(i-100000030)
     query = "INSERT INTO patient (ssn, fname, lname, phone, address, insuranceCo) VALUES (%s,%s,%s,%s,%s,%s);"
     args = (str(i),fnames[random.randint(0,4944)],lnames[random.randint(0,663)],str(nextPhone),address[nextAddr],insuranceCo[random.randint(0,2)])
-    print "DEBUGQUERY: " + query
+#    print "DEBUGQUERY: " + query
     nextPhone+=1
     nextAddr+=1
     cursor.execute(query,args)
@@ -223,7 +223,7 @@ for i in range(100000180,100000210):
     print "adding nurse#: " + str(i-100000000)
     query = "INSERT INTO nurse (ssn, fname, lname, phone, address,hospital) VALUES (%s,%s,%s,%s,%s,%s);"
     args = (str(i),fnames[random.randint(0,4944)],lnames[random.randint(0,663)],str(nextPhone),address[nextAddr],str(random.randint(1,3)))
-    print "DEBUGQUERY: " + query
+#    print "DEBUGQUERY: " + query
     nextPhone+=1
     nextAddr+=1
     cursor.execute(query,args)
