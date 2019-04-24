@@ -46,7 +46,7 @@ table = ['doctor','patient','nurse','login','insuranceCo','Appointment','hospita
 cols = ["ssn VARCHAR(9), lname VARCHAR(255), fname VARCHAR(255), phone VARCHAR(11), speciality VARCHAR(255), hospital VARCHAR(150), address VARCHAR(255)",
         "ssn VARCHAR(9), lname VARCHAR(255), fname VARCHAR(255), phone VARCHAR(11), address VARCHAR(255), primaryDoctor VARCHAR(9), insuranceCo VARCHAR(150)",
         "ssn VARCHAR(9), lname VARCHAR(255), fname VARCHAR(255), phone VARCHAR(11), address VARCHAR(255), hospital INT",
-        "login VARCHAR(150), passwordHash VARCHAR(255), ssn VARCHAR(9), level INT",
+        "login VARCHAR(150), passwordHash VARCHAR(255), ssn VARCHAR(9)",
         "name VARCHAR(150), phone VARCHAR(11), address VARCHAR(255)",
         "dateTime DATETIME, location VARCHAR(255), doctor VARCHAR(9), patient VARCHAR(9), paid DECIMAL(7,2), ammountBilled DECIMAL(7,2)",
         "id INT AUTO_INCREMENT, name VARCHAR(255), phone VARCHAR(11), address VARCHAR(255), PRIMARY KEY(id)",
@@ -80,8 +80,8 @@ Pkeys = ["ADD PRIMARY KEY (ssn)",
 
 Fkeys = ["",
         "ADD (FOREIGN KEY (primaryDoctor) REFERENCES doctor(ssn), FOREIGN KEY(insuranceCo) REFERENCES insuranceCo(name))",
-         "ADD FOREIGN KEY (hospital) REFERENCES hospital(id)",
-         "ADD FOREIGN KEY (ssn) REFERENCES doctor(ssn)",
+        "ADD FOREIGN KEY (hospital) REFERENCES hospital(id)",
+        "",
         "",
         "ADD (FOREIGN KEY (doctor) REFERENCES doctor(ssn), FOREIGN KEY (patient) REFERENCES patient(ssn))",
         "",
@@ -245,19 +245,19 @@ hashes=[]
 #    hashes.append(hash.hexdigest())
 #    print(passwd + ":" + hash.hexdigest())
     
-query = "SELECT fname,lname FROM doctor;"
+query = "SELECT fname,lname,ssn FROM doctor;"
 cursor.execute(query)
-users=[]
-for fname,lname in cursor:
-    users.append(fname + "." + lname)
-query = "SELECT fname,lname FROM patient;"
+users={}
+for fname,lname,ssn in cursor:
+    users[fname + "." + lname] = ssn
+query = "SELECT fname,lname,ssn FROM patient;"
 cursor.execute(query)
-for fname,lname in cursor:
-    users.append(fname + "." + lname)
-query = "SELECT fname,lname FROM nurse;"
+for fname,lname,ssn in cursor:
+    users[fname + "." + lname] = ssn
+query = "SELECT fname,lname,ssn FROM nurse;"
 cursor.execute(query)
-for fname,lname in cursor:
-    users.append(fname + "." + lname)
+for fname,lname,ssn in cursor:
+    users[fname + "." + lname] = ssn
     
 # This was for debug of username creation    
     
@@ -275,8 +275,8 @@ for user in users:
     hash = hashlib.sha1(passwd)
     filestr= user + ":" + passwd
     userpassFN.write(filestr+'\n')
-    query="INSERT INTO login (login, passwordHash) VALUES ('" + user + "','" + hash.hexdigest() + "');"
-#    print("DEBUGQUERY: " + query)
+    query="INSERT INTO login (login, passwordHash,ssn) VALUES ('" + user + "','" + hash.hexdigest() + "','" + users[user] +"');"
+    print("DEBUGQUERY: " + query)
     print("CREATING USER: " + user + " with hash : " + hash.hexdigest())
     cursor.execute(query)
 
