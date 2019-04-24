@@ -202,9 +202,9 @@ for i in range(100000000,100000030):
 
 #
 # here is the same for patients
-# creating 150 -TODO- set a primary doctor
+# creating 150
 #
-docSSNs=[]
+docSSNs=[] # for primary doctor
 query="SELECT ssn FROM doctor;"
 cursor.execute(query)
 for ssn, in cursor:
@@ -273,7 +273,7 @@ for fname,lname,ssn in cursor:
 userpassFN = open("user_passwd.txt","w+")
 
 #
-# this gens the users and the userpassword list -TODO- link to the SSN of the users
+# this gens the users and the userpassword list
 #
 for user in users:
     passwd=passwords[random.randint(0,976)]
