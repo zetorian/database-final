@@ -204,12 +204,17 @@ for i in range(100000000,100000030):
 # here is the same for patients
 # creating 150 -TODO- set a primary doctor
 #
-
+docSSNs=[]
+query="SELECT ssn FROM doctor;"
+cursor.execute(query)
+for ssn, in cursor:
+    docSSNs.append(ssn)
+    
 for i in range(100000030,100000180):
     print "adding patient#: " + str(i-100000030)
-    query = "INSERT INTO patient (ssn, fname, lname, phone, address, insuranceCo) VALUES (%s,%s,%s,%s,%s,%s);"
-    args = (str(i),fnames[random.randint(0,4944)],lnames[random.randint(0,663)],str(nextPhone),address[nextAddr],insuranceCo[random.randint(0,2)])
-#    print "DEBUGQUERY: " + query
+    query = "INSERT INTO patient (ssn, fname, lname, phone, address, insuranceCo,primaryDoctor) VALUES (%s,%s,%s,%s,%s,%s,%s);"
+    args = (str(i),fnames[random.randint(0,4944)],lnames[random.randint(0,663)],str(nextPhone),address[nextAddr],insuranceCo[random.randint(0,2)],docSSNs[random.randint(0,29)])
+    print "DEBUGQUERY: " + query
     nextPhone+=1
     nextAddr+=1
     cursor.execute(query,args)
@@ -273,11 +278,11 @@ userpassFN = open("user_passwd.txt","w+")
 for user in users:
     passwd=passwords[random.randint(0,976)]
     hash = hashlib.sha1(passwd)
-    filestr= user + ":" + passwd
+    filestr= str(user + ":" + passwd)
     userpassFN.write(filestr+'\n')
     query="INSERT INTO login (login, passwordHash,ssn) VALUES ('" + user + "','" + hash.hexdigest() + "','" + users[user] +"');"
-    print("DEBUGQUERY: " + query)
-    print("CREATING USER: " + user + " with hash : " + hash.hexdigest())
+#    print("DEBUGQUERY: " + query)
+    print("CREATING USER: " + user + " with hash : " + hash.hexdigest() + " and ssn : " + users[user])
     cursor.execute(query)
 
 #
