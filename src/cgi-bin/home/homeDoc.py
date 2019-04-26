@@ -43,7 +43,7 @@ for lname,fname,ssn in cursor:
     print '<tr>'
     print '<td>'+ lname+ '</td>'
     print '<td>'+ fname+ '</td>'
-    print '<td>'+ ssn+ '</td>'
+    print '<td><a href="./viewPatient.py?ssn='+ssn+'">'+ ssn+ '</td>'
     print '</tr>'
 
 print '</tbody>'
