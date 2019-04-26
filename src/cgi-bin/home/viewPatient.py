@@ -36,3 +36,58 @@ for lname, fname in cursor:
     print '<td>'+ lname+ '</td>'
     print '<td>'+ fname+ '</td>'
     print '</tr>'
+
+print '</tbody>'
+
+print '<br />'
+print '<br />'
+
+print '<table><caption>Appointment History</caption>'
+print '<thead>'
+print '<tr>'
+print '<th>Date/Time</th>'
+print '<th>Location</th>'
+print '<th>Doctor</th>'
+print '</tr>'
+print '</thead>'
+print '<tbody>'
+
+print '</tbody>'
+
+print '<br />'
+print '<br />'
+
+print '<table><caption>Procedure History</caption>'
+print '<thead>'
+print '<tr>'
+print '<th>Date/Time</th>'
+print '<th>Location</th>'
+print '<th>Doctor</th>'
+print '<th>Procedure Type</th>'
+print '<th>ID</th>'
+print '</tr>'
+print '</thead>'
+print '<tbody>'
+
+print '</tbody>'
+
+print '<br />'
+print '<br />'
+
+print '<table><caption>Prescription History</caption>'
+print '<thead>'
+print '<tr>'
+print '<th>Date</th>'
+print '<th>ID</th>'
+print '<th>Expires</th>'
+print '<th>Drug Name</th>'
+print '<th>Doctor</th>'
+print '</tr>'
+print '</thead>'
+print '<tbody>'
+
+
+print '</tbody>'
+
+print '<br />'
+print '<br />'
