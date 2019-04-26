@@ -11,7 +11,7 @@ user='Moreen.Acker'
 #if we got here the user must be a doctor
 userType='doctor'
 userSSN='100000001'
-
+print '<!DOCTYPE html><html><head><style>table, th, td {  border: 1px solid black;}</style></head>'
 print '<h1>'
 print 'You are logged in as ' + user
 print '</h1>\n'
@@ -81,6 +81,5 @@ for dateTime,location,patient in cursor:
         print '</tr>'
 
 print '</tbody>'
-
 
 print '</body>'
