@@ -8,7 +8,7 @@ print 'content-type: text/html\n'
 
 #this is hard coded for a doctor that exists in my test data
 user=''
-#if we got here the user must be a doctor
+#if we got here the user must be a nurse
 userType='nurse'
 userSSN=''
 print '<!DOCTYPE html><html><head><style>table, th, td {  border: 1px solid black;}</style></head>'
