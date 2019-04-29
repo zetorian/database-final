@@ -49,6 +49,7 @@ date30futureString = date30future.strftime("%Y-%m-%d")
 
 #isPosted = True #Comment this out in final version
 
+#isPosted = True # remove after testing
 if isPosted: #we have already done this
     patientFirst = form.getvalue('patientFirst')
     patientLast = form.getvalue('patientLast')
@@ -60,6 +61,8 @@ if isPosted: #we have already done this
     billed = form.getvalue('billed')
     paidFloat = None
     billedFloat = None
+    procedureName = form.getvalue('procedureName')
+    results = form.getvalue('results')
     
     dateAndTime = form.getvalue('dateAndTime')
 
@@ -128,6 +131,7 @@ if isPosted: #we have already done this
 
     #check to be sure expiration date is not before prescription date
 
+    #isError = False #remove after testing
     if isError:
         print ("Content-type:text/html\r\n\r\n")
         print ('<html>')
@@ -136,9 +140,19 @@ if isPosted: #we have already done this
         print("""<style> p.error {color: red;} </style>""")
         print ('</head>')
         print ('<body>')
-        print ('<h2>Add Appointment</h2>')
-        print('<form action="./addappointment.py" method="post">')
+        print ('<h2>Add Procedure</h2>')
+        print('<form action="./addprocedure.py" method="post">')
         print('<table>')
+
+        print('<tr>')
+        print('<td>Procedure Name</td>')
+        print('<td>')
+        if procedureName:
+            print('<input type="text" name="procedureName" value="%s"></input>' % procedureName)
+        else:
+            print('<input type="text" name="procedureName"></input>')#flesh this out before demo
+        print('</td>')
+        print('</tr>')
 
         print('<tr>')
         print('<td>Patient First Name</td>')
@@ -191,7 +205,7 @@ if isPosted: #we have already done this
         print('</tr>')
 
         print('<tr>')
-        print('<td>Appointment Location</td>')
+        print('<td>Procedure Location</td>')
         print('<td>')
         if location:
             print('<input type="text" name="location" value="%s"></input>' % location)
@@ -241,6 +255,16 @@ if isPosted: #we have already done this
         print('</tr>')
 
         print('<tr>')
+        print('<td>Procedure Results</td>')
+        print('<td>')
+        if results:
+            print('<input type="text" name="results" value="%s"></input>' % results)
+        else:
+            print('<input type="text" name="results"></input>')
+        print('</td>')
+        print('</tr>')
+
+        print('<tr>')
         print('<td><br/></td>')
         print('<td>')
         print('<br/>') #flesh this out before demo
@@ -248,7 +272,7 @@ if isPosted: #we have already done this
         print('</tr>')
 
         print('<tr>')
-        print('<td>Appointment Date and Time</td>')
+        print('<td>Procedure Date and Time</td>')
         print('<td>')
         print('<input type="datetime-local" name="dateAndTime" value="'+ dateAndTime + '"min="' + dateAndTime + '">')
         print('</td>')
@@ -285,7 +309,11 @@ if isPosted: #we have already done this
         paidString = "%.2f" % paidFloat
         billedString = "%.2f" % billedFloat
 
-        query = "INSERT INTO Appointment (dateTime, location, doctor, patient, paid, ammountBilled) VALUES ('" + dateAndTime + "', '" + location + "', '" + docSSN + "', '" + patientSSN + "', '" + paidString + "', '" + billedString + "');"
+        #query = "INSERT INTO Appointment (dateTime, location, doctor, patient, paid, ammountBilled) VALUES ('" + dateAndTime + "', '" + location + "', '" + docSSN + "', '" + patientSSN + "', '" + paidString + "', '" + billedString + "');"
+
+        query = "INSERT INTO procedures (procedureName, dateTime, doctor, patient, results, paid, amountBilled) VALUES ('" + procedureName + "', '" + dateAndTime + "', '" + docSSN + "', '" + patientSSN + "', '" + results + "', '" + paidString + "', '" + billedString + "');"
+        
+        
         cursor.execute(query)
 
         #patient VARCHAR(9), doctor VARCHAR(9), date DATETIME, expires DATETIME,
@@ -296,9 +324,8 @@ if isPosted: #we have already done this
         print ('<title>EMR System</title>')
         print ('</head>')
         print ('<body>')
-        print ('<h2>Appointment for ' + patientFirst + ' ' + patientLast + ' Added</h2>')
+        print ('<h2>Procedure for ' + patientFirst + ' ' + patientLast + ' Added</h2>')
         print ('<br><br>')
-        #print(query)
         #print(paidString + "   " + billedString + "<br> <br>")
         print ('<form action="home.py">')
         print ('<input type="submit" value="Return to Menu" />')
@@ -316,9 +343,16 @@ else: #First time loading the display
     print ('<title>EMR System</title>')
     print ('</head>')
     print ('<body>')
-    print ('<h2>Add Appointment</h2>')
-    print('<form action="./addappointment.py" method="post">')
+    print ('<h2>Add Procedure</h2>')
+    print('<form action="./addprocedure.py" method="post">')
     print('<table>')
+
+    print('<tr>')
+    print('<td>Procedure Name</td>')
+    print('<td>')
+    print('<input type="text" name="procedureName">') #flesh this out before demo
+    print('</td>')
+    print('</tr>')
 
     print('<tr>')
     print('<td>Patient First Name</td>')
@@ -349,7 +383,7 @@ else: #First time loading the display
     print('</tr>')
 
     print('<tr>')
-    print('<td>Appointment Location</td>')
+    print('<td>Procedure Location</td>')
     print('<td>')
     print('<input type="text" name="location">') #flesh this out before demo
     print('</td>')
@@ -370,6 +404,13 @@ else: #First time loading the display
     print('</tr>')
 
     print('<tr>')
+    print('<td>Procedure Results</td>')
+    print('<td>')
+    print('<input type="text" name="results">') #flesh this out before demo
+    print('</td>')
+    print('</tr>')
+
+    print('<tr>')
     print('<td><br/></td>')
     print('<td>')
     print('<br/>')
@@ -379,7 +420,7 @@ else: #First time loading the display
     
 
     print('<tr>')
-    print('<td>Appointment Date and Time</td>')
+    print('<td>Procedure Date and Time</td>')
     print('<td>')
     print('<input type="datetime-local" name="dateAndTime" value="'+ currentDateString + '"min="' + currentDateString + '">')
     print('</td>')

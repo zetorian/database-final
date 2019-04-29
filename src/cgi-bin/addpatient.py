@@ -286,7 +286,7 @@ if isPosted:
         print ('<h2>Patient Added</h2>')
 
         print ('<br> <br>')
-        print ('<form action="runme.py">')
+        print ('<form action="home.py">')
         print ('<input type="submit" value="Return to Menu" />')
         print ('</form>')
         
@@ -379,6 +379,13 @@ else:
     print('<input type="hidden" name="isposted" value="true"></input>')
     print('<input type="submit" value="Submit"></input>')
     print('</form>')
+
+    print('<br>')
+
+    print ('<form action="home.py">')
+    print ('<input type="submit" value="Return to Menu" />')
+    print ('</form>')
+
     print ('</body>')
     print ('</html>')
 

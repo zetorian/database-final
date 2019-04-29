@@ -176,7 +176,7 @@ if isPosted: #we have already done this
 
         print('<br><br>')
 
-        print ('<form action="runme.py">')
+        print ('<form action="home.py">')
         print ('<input type="submit" value="Return to Menu" />')
         print ('</form>')
 
@@ -204,7 +204,7 @@ if isPosted: #we have already done this
         print ('<h2>Prescription for ' + patientFirst + ' ' + patientLast + ' Added</h2>')
         print ('<br><br>')
 
-        print ('<form action="runme.py">')
+        print ('<form action="home.py">')
         print ('<input type="submit" value="Return to Menu" />')
         print ('</form>')
 
@@ -284,7 +284,7 @@ else: #First time loading the display
 
     print('<br><br>')
 
-    print ('<form action="runme.py">')
+    print ('<form action="home.py">')
     print ('<input type="submit" value="Return to Menu" />')
     print ('</form>')
 
