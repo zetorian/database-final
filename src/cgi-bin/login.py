@@ -8,12 +8,16 @@
 # documentation:
 # https://docs.python.org/3/library/cgi.html
 
-import msql.connector
+import mysql.connector
 
 import cgi
 import cgitb
 cgitb.enable() #enable error logging in browser, we probably want this on for a while
 # cgitb.enable(display=0, logdir="/path/to/logdir") # if you prefer log files
+
+#placeholder for now, eventually to hold the entire login method.
+def _check_pass(p):
+    return True
 
 print("Content-Type: text/html\n\n") #required header line
 
@@ -23,8 +27,9 @@ if "uname" not in form or "pass" not in form:
         "could not log in\n" +
         "<a href=/login.html>return to login page</a>")
 
-result = _check_pass()
+password = form.getvalue("pass")
 
-def _check_pass(p)
-    
-    
+result = _check_pass(password)
+
+if result:
+    print("stuffs")
