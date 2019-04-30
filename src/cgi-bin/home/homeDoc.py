@@ -25,6 +25,7 @@ cursor.execute('USE EMR;')
 query = 'select lname,fname,ssn from patient where primaryDoctor='+userSSN+';'
 cursor.execute(query)
 
+
 #
 # Table to display the doctor's patients
 #

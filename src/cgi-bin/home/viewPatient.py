@@ -22,6 +22,20 @@ print '<!DOCTYPE html><html><head><style>table, th, td {  border: 1px solid blac
 query='select lname,fname,ssn,address,phone,primaryDoctor from patient where ssn ='+patientSSN+';'
 cursor.execute(query);
 
+#
+# for directing to the update pages make sure that they are in the same directory
+#
+print '<form action="addprescription.py" method="post">'
+print '<input type="submit" value="Add a Prescription" />'
+print '</form>'
+
+print '<form action="addprocedure.py" method="post">'
+print '<input type="submit" value="Schedule a Procedure" />'
+print '</form>'
+
+print '<form action="addappointment.py" method="post">'
+print '<input type="submit" value="Schedule an Appointment" />'
+print '</form>'
 
 print '<table><caption>Patient Details</caption>'
 print '<thead>'

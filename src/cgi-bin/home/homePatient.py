@@ -30,6 +30,14 @@ print 'You are logged in as ' + user
 print '</h1>\n'
 print '<body>\n'
 
+#
+# schedule a new appointment
+#
+
+print '<form action="addappointment.py" method="post">'
+print '<input type="submit" value="Schedule an Appointment" />'
+print '</form>'
+
 
 query='select lname,fname,ssn,address,phone,primaryDoctor from patient where ssn ='+userSSN+';'
 cursor.execute(query);
