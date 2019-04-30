@@ -152,7 +152,14 @@ print '</tr>'
 print '</thead>'
 print '<tbody>'
 
+query='select balance from bill where patient='+userSSN+';'
+cursor.execute(query);
 
+for balance in cursor:
+    print '<tr>'
+    print '<th>'+balance+'</th>'
+    print '</tr>'
+    
 print '</tbody>'
 
 print '<br />'
@@ -164,10 +171,25 @@ print '<tr>'
 print '<th>First Name</th>'
 print '<th>Last Name</th>'
 print '<th>Hospital</th>'
+print '<th>Phone</th>'
 print '</tr>'
 print '</thead>'
 print '<tbody>'
 
+cursor.execute("select primaryDoctor from patient where ssn ="+userSSN+ ";")
+for result in cursor:
+    doctor=result
+    
+query='select fname,lname,hospital,phone from doctor where ssn ='+doctor+';'
+cursor.execute(query);
+
+for fname,lname,hospital,phone in cursor:
+    print '<tr>'
+    print '<th>'+fname+'</th>'
+    print '<th>'+lname+'</th>'
+    print '<th>'+hospital+'</th>'
+    print '<th>'+phone+'</th>'
+    print '</tr>'
 
 print '</tbody>'
 
