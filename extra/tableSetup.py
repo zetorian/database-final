@@ -277,12 +277,12 @@ userpassFN = open("user_passwd.txt","w+")
 #
 for user in users:
     passwd=passwords[random.randint(0,976)]
-    hash = hashlib.sha1(passwd)
+    hashed_pass = hashlib.sha1(passwd.encode("ascii"))
     filestr= str(user + ":" + passwd)
     userpassFN.write(filestr+'\n')
-    query="INSERT INTO login (login, passwordHash,ssn) VALUES ('" + user + "','" + hash.hexdigest() + "','" + users[user] +"');"
+    query="INSERT INTO login (login, passwordHash,ssn) VALUES ('" + user + "','" + hashed_pass.hexdigest() + "','" + users[user] +"');"
 #    print("DEBUGQUERY: " + query)
-    print("CREATING USER: " + user + " with hash : " + hash.hexdigest() + " and ssn : " + users[user])
+    print("CREATING USER: " + user + " with hash : " + hashed_pass.hexdigest() + " and ssn : " + users[user])
     cursor.execute(query)
 
 #

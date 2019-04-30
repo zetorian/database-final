@@ -1,0 +1,25 @@
+# $Id$
+# Maintainer: Ben Metzger <bmetzger97@gmail.com>
+
+pkgbase=cgilib
+pkgname=python-cgilib-database
+pkgver=0.1
+_pkgver=0.1
+pkgrel=1
+pkgdesc='a simple cgi lib used for a school pet project'
+arch=('any')
+license=('ISC')
+depends=('python' 'python-pymacaroons' 'python-cookies')
+makedepends=('python-setuptools')
+source=("$pkgbase-$pkgver.tar.gz")
+sha512sums=('SKIP')
+
+build() {
+	cd "$srcdir/${pkgbase%-VCS}-$_pkgver"
+	python ./setup.py build
+}
+
+package() {
+	cd "$srcdir/${pkgbase%-VCS}-$_pkgver"
+	python ./setup.py install --root="$pkgdir/" --optimize=1 --skip-build
+}
