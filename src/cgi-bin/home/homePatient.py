@@ -6,11 +6,8 @@ import os
 import Cookie
 import mysql.connector
 
-# Create instance of FieldStorage
-form = cgi.FieldStorage()
 
 # Get data from fields
-patientSSN = form.getvalue('ssn')
 cnx = mysql.connector.connect(user='root',password='',host='localhost')
 cursor = cnx.cursor(buffered=True)
 cursor2 = cnx.cursor(buffered=True)
