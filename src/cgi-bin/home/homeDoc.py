@@ -5,9 +5,8 @@ import http.cookies
 import mysql.connector
 from cgilib import loginlib
 
-print('content-type: text/html\n\n')
+print('content-type: text/html')
 
-#if we got here the user must be a doctor
 result = loginlib.verify_login()
 user = ""
 userType='patient'
@@ -16,8 +15,12 @@ if result is not None: #if we get a valid result, we are signed in
     (ssn, role, user) = result
     userType = role
     userSSN = ssn
+    if role != 'doctor':
+        print("Location: /cgi-bin/cookie_test.py")
 else: # else bump back to login page
-    print("Location: /html/login.html")
+    print("Location: /login.html")
+
+print("\n\n")
 
 print('<!DOCTYPE html><html><head><style>table, th, td {  border: 1px solid black;}</style></head>')
 print('<h1>')
@@ -25,7 +28,7 @@ print(('You are logged in as ' + user))
 print('</h1>\n')
 print('<body>\n')
 
-cnx = mysql.connector.connect(user='root',password='',host='localhost')
+cnx = mysql.connector.connect(user='cs',password='',host='localhost')
 cursor = cnx.cursor(buffered=True)
 cursor2 = cnx.cursor(buffered=True)
 #print 'attempting query'

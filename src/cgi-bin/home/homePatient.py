@@ -23,10 +23,14 @@ if result is not None:
     (ssn, role, user) = result
     userType = role
     userSSN = ssn
+    if role != 'patient':
+        print("Location: /cgi-bin/cookie_test.py")
 else:
-    print("Location: /html/login.html")
+    print("Location: /login.html")
 
-print('\n\n<!DOCTYPE html><html><head><style>table, th, td {  border: 1px solid black;}</style></head>')
+print("\n\n\n")
+
+print('<!DOCTYPE html><html><head><style>table, th, td {  border: 1px solid black;}</style></head>')
 
 #if we got here the user must be a patient
 print('<!DOCTYPE html><html><head><style>table, th, td {  border: 1px solid black;}</style></head>')

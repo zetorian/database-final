@@ -3,20 +3,41 @@
 # Import modules for CGI handling and mysql
 import cgi, cgitb
 import os
+import sys
 import http.cookies
 import mysql.connector
+from cgilib import loginlib
 
 # Create instance of FieldStorage
 form = cgi.FieldStorage()
 
+print("Content-type:text/html")
+
+result = loginlib.verify_login()
+user = ""
+userType=''
+userSSN='100000179'
+if result is not None: #if we get a valid result, we are signed in
+    (ssn, role, user) = result
+    userType = role
+    userSSN = ssn
+    if role != 'nurse' and role != 'doctor':
+        print("\n\n\n")
+        print("You are not authorized to view this page")
+        print("return to homepage: <a href=/cgi-bin/cookie_test.py>Home</a>")
+        sys.exit(0)
+else: # else bump back to login page
+    print("Location: /login.html")
+
+print("\n\n")
+
 # Get data from fields
 patientSSN = form.getvalue('ssn')
-cnx = mysql.connector.connect(user='root',password='',host='localhost')
+cnx = mysql.connector.connect(user='cs',password='',host='localhost')
 cursor = cnx.cursor(buffered=True)
 cursor2 = cnx.cursor(buffered=True)
 cursor.execute("USE EMR;")
 
-print("Content-type:text/html\r\n\r\n")
 print('<!DOCTYPE html><html><head><style>table, th, td {  border: 1px solid black;}</style></head>')
 
 query='select lname,fname,ssn,address,phone,primaryDoctor from patient where ssn ='+patientSSN+';'
@@ -35,6 +56,10 @@ print('</form>')
 
 print('<form action="addappointment.py" method="post">')
 print('<input type="submit" value="Schedule an Appointment" />')
+print('</form>')
+
+print('<form action="addNote.py" method="post">')
+print('<input type="submit" value="Add a General Note" />')
 print('</form>')
 
 print('<table><caption>Patient Details</caption>')
