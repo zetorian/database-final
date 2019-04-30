@@ -14,18 +14,12 @@ makedepends=('python-setuptools')
 source=("$pkgbase-$pkgver.tar.gz")
 sha512sums=('SKIP')
 
-prepare() {
-  cd "$srcdir"
-#  cp -a "${pkgbase%-git}-$_pkgver"
+build() {
+	cd "$srcdir/${pkgbase%-VCS}-$_pkgver"
+	python ./setup.py build
 }
 
-pkgver() {
-  cd $pkgbase-$_pkgver
-  git rev-parse --short HEAD | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
-}
-
-package_python-nio-git() {
-  cd "$srcdir/${pkgbase%-VCS}-$_pkgver"
-
-  make DESTDIR="$pkgdir" install
+package() {
+	cd "$srcdir/${pkgbase%-VCS}-$_pkgver"
+	python ./setup.py install --root="$pkgdir/" --optimize=1 --skip-build
 }

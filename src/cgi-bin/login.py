@@ -9,27 +9,42 @@
 # https://docs.python.org/3/library/cgi.html
 
 import mysql.connector
-
+import datetime
 import cgi
 import cgitb
 cgitb.enable() #enable error logging in browser, we probably want this on for a while
 # cgitb.enable(display=0, logdir="/path/to/logdir") # if you prefer log files
+from cgilib import loginlib
 
-#placeholder for now, eventually to hold the entire login method.
-def _check_pass(p):
-    return True
-
-print("Content-Type: text/html\n\n") #required header line
-
+print("Content-Type: text/html") #required header line
+result = loginlib.verify_login()
 form = cgi.FieldStorage()
 if "uname" not in form or "pass" not in form:
+    print("\n\n")
     print("<H1>Error</H2>\n" +
-        "could not log in\n" +
+        "You need to enter a username and password to log in\n" +
         "<a href=/login.html>return to login page</a>")
+else:
+    password = form.getvalue("pass")
+    user = form.getvalue("uname")
 
-password = form.getvalue("pass")
+    result = loginlib.check_password(password, user)
 
-result = _check_pass(password)
+    if result is not None:
+        (ssn, role, user) = result
+        cookie = loginlib.init_login(ssn, role, user)
+        print(cookie)
+        print("Location: http://127.0.0.1/cgi-bin/cookie_test.py")
+        print("\n\n")
+        print("have a cookie!")
+    else:
+        print("\n\n")
+        print("<H1>Error</H2>\n" +
+            "Invalid username and password, please try again\n" +
+            "<a href=/login.html>return to login page</a>")
 
-if result:
-    print("stuffs")
+
+    
+
+    #print("stuffs")
+    

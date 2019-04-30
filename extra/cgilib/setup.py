@@ -1,7 +1,6 @@
 from setuptools import setup, find_packages
 
 install_requires= [
-    'cookies>=1.0'
     'pymacaroons>=0.10'
 ] 
 
@@ -13,6 +12,7 @@ setup(
     description="Library for easy cookie based login through python",
     #url="http://github.com/UND-UCAS/crypt-swarm",
     install_requires=install_requires,
+    zip_safe=False
 
     #entry_points={
     #    'console_scripts': [
