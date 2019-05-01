@@ -6,7 +6,7 @@ import random
 import cgi,cgitb
 import datetime
 
-cnx = mysql.connector.connect(user='root',password='newpassword',host='localhost')
+cnx = mysql.connector.connect(user='cs',password='',host='localhost')
 cursor = cnx.cursor(buffered=True)
 
 args = ""

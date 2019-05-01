@@ -46,15 +46,15 @@ cursor.execute(query);
 #
 # for directing to the update pages make sure that they are in the same directory
 #
-print('<form action="addprescription.py" method="post">')
+print('<form action="/cgi-bin/addprescription.py" method="post">')
 print('<input type="submit" value="Add a Prescription" />')
 print('</form>')
 
-print('<form action="addprocedure.py" method="post">')
+print('<form action="/cgi-bin/addprocedure.py" method="post">')
 print('<input type="submit" value="Schedule a Procedure" />')
 print('</form>')
 
-print('<form action="addappointment.py" method="post">')
+print('<form action="/cgi-bin/addappointment.py" method="post">')
 print('<input type="submit" value="Schedule an Appointment" />')
 print('</form>')
 
