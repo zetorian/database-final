@@ -43,7 +43,7 @@ print('<body>\n')
 # schedule a new appointment
 #
 
-print('<form action="addappointment.py" method="post">')
+print('<form action="./addappointment.py" method="post">')
 print('<input type="submit" value="Schedule an Appointment" />')
 print('</form>')
 

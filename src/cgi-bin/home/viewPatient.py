@@ -58,10 +58,6 @@ print('<form action="/cgi-bin/addappointment.py" method="post">')
 print('<input type="submit" value="Schedule an Appointment" />')
 print('</form>')
 
-print('<form action="addNote.py" method="post">')
-print('<input type="submit" value="Add a General Note" />')
-print('</form>')
-
 print('<table><caption>Patient Details</caption>')
 print('<thead>')
 print('<tr>')

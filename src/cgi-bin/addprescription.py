@@ -5,6 +5,24 @@ import sys
 import random
 import cgi,cgitb
 import datetime
+from cgilib import loginlib
+
+print ("Content-type:text/html")
+
+result = loginlib.verify_login()
+user = ""
+userType=''
+userSSN=''
+if result is not None: #if we get a valid result, we are signed in
+    (ssn, role, user) = result
+    userType = role
+    userSSN = ssn
+else: # else bump back to login page
+    print("Location: /login.html")
+    print("\n\n")
+    sys.exit()
+
+print("\n\n")
 
 cnx = mysql.connector.connect(user='cs',password='',host='localhost')
 cursor = cnx.cursor(buffered=True)
@@ -83,7 +101,6 @@ if isPosted: #we have already done this
     #check to be sure expiration date is not before prescription date
 
     if isError:
-        print ("Content-type:text/html\r\n\r\n")
         print ('<html>')
         print ('<head>')
         print ('<title>EMR System</title>')
@@ -176,7 +193,7 @@ if isPosted: #we have already done this
 
         print('<br><br>')
 
-        print ('<form action="home.py">')
+        print ('<form action="/cgi-bin/cookie_test.py">')
         print ('<input type="submit" value="Return to Menu" />')
         print ('</form>')
 
@@ -195,7 +212,6 @@ if isPosted: #we have already done this
 
         #patient VARCHAR(9), doctor VARCHAR(9), date DATETIME, expires DATETIME,
 
-        print ("Content-type:text/html\r\n\r\n")
         print ('<html>')
         print ('<head>')
         print ('<title>EMR System</title>')
@@ -204,7 +220,7 @@ if isPosted: #we have already done this
         print ('<h2>Prescription for ' + patientFirst + ' ' + patientLast + ' Added</h2>')
         print ('<br><br>')
 
-        print ('<form action="home.py">')
+        print ('<form action="/cgi-bin/cookie_test.py">')
         print ('<input type="submit" value="Return to Menu" />')
         print ('</form>')
 
@@ -214,7 +230,6 @@ if isPosted: #we have already done this
   
 
 else: #First time loading the display
-    print ("Content-type:text/html\r\n\r\n")
     print ('<html>')
     print ('<head>')
     print ('<title>EMR System</title>')
@@ -284,7 +299,7 @@ else: #First time loading the display
 
     print('<br><br>')
 
-    print ('<form action="home.py">')
+    print ('<form action="/cgi-bin/cookie_test.py">')
     print ('<input type="submit" value="Return to Menu" />')
     print ('</form>')
 
