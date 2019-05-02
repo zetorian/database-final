@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{listings}
+\usepackage[usenames,dvipsnames]{color}  %% Allow color names
+\usepackage[T1]{fontenc}
+\lstdefinestyle{customasm}{
+  belowcaptionskip=1\baselineskip,
+  xleftmargin=\parindent,
+  language=C++,   %% Change this to whatever you write in
+  breaklines=true, %% Wrap long lines
+  basicstyle=\footnotesize\ttfamily,
+  commentstyle=\itshape\color{Gray},
+  stringstyle=\color{Black},
+  keywordstyle=\bfseries\color{OliveGreen},
+  identifierstyle=\color{blue},
+  xleftmargin=-8em,
+}        
+\usepackage[colorlinks=true,linkcolor=blue]{hyperref} 
+\begin{document}
+\tableofcontents
+
+\newpage
+\section{src/cgi-bin/login.py}
+\lstinputlisting[style=customasm]{src/cgi-bin/login.py}
+\newpage
+\section{\detokenize{src/cgi-bin/cookie_test.py}}
+\lstinputlisting[style=customasm]{\detokenize{src/cgi-bin/cookie_test.py}}
+\newpage
+\section{src/cgi-bin/home/homeDoc.py}
+\lstinputlisting[style=customasm]{src/cgi-bin/home/homeDoc.py}
+\newpage
+\section{src/cgi-bin/home/homeNurse.py}
+\lstinputlisting[style=customasm]{src/cgi-bin/home/homeNurse.py}
+\newpage
+\section{src/cgi-bin/home/homePatient.py}
+\lstinputlisting[style=customasm]{src/cgi-bin/home/homePatient.py}
+\newpage
+\section{src/cgi-bin/home/viewPatient.py}
+\lstinputlisting[style=customasm]{src/cgi-bin/home/viewPatient.py}
+\newpage
+\section{src/cgi-bin/addpatient.py}
+\lstinputlisting[style=customasm]{src/cgi-bin/addpatient.py}
+\newpage
+\section{src/cgi-bin/addprocedure.py}
+\lstinputlisting[style=customasm]{src/cgi-bin/addprocedure.py}
+\newpage
+\section{src/cgi-bin/addappointment.py}
+\lstinputlisting[style=customasm]{src/cgi-bin/addappointment.py}
+\newpage
+\section{src/cgi-bin/addprescription.py}
+\lstinputlisting[style=customasm]{src/cgi-bin/addprescription.py}
+\newpage
+\section{src/html/login.html}
+\lstinputlisting[style=customasm]{src/html/login.html}
+\newpage
+\section{extra/tableSetup.py}
+\lstinputlisting[style=customasm]{extra/tableSetup.py}
+\end{document}
